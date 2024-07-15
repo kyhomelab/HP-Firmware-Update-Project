@@ -27,30 +27,50 @@ Same here for Dell but for HP we automated the HPIA for local run via command li
 
 https://ftp.hp.com/pub/caps-softpaq/cmit/whitepapers/HPIAUserGuide.pdf
 
-
-
 https://www.hp.com/us-en/solutions/client-management-solutions.html?jumpid=va_5b67f45b1f
-
-
 
 https://www.hp.com/us-en/solutions/client-management-solutions/download.html?jumpid=va_5b67f45b1f
 
-
-
 https://hpia.hpcloud.hp.com/downloads/driverpackcatalog/HP_Driverpack_Matrix_x64.html?jumpid=va_5b67f45b1f
 
-
-
-Next steps figure out HP Image Assistant
+> Next steps figure out HP Image Assistant
 
 https://support.hp.com/us-en/document/ish_7636709-7636753-16
 
-
-
 Link for HPIA download: https://hpia.hpcloud.hp.com/downloads/hpia/hp-hpia-5.2.1.exe?jumpid=va_5b67f45b1f
 
-
-
-Possible cmd to run:
+> Possible cmd to run:
 
 https://www.reddit.com/r/Hewlett_Packard/comments/r11637/hp_image_assistant_driver_maintenance/
+
+https://www.reddit.com/r/Intune/comments/ogfuvz/hp_image_assistant_deployed_to_a_device/
+
+https://msendpointmgr.com/2020/09/10/automatically-install-the-latest-hp-drivers-during-autopilot-provisioning/?
+
+https://techcommunity.microsoft.com/t5/windows-it-pro-blog/introducing-a-new-deployment-service-for-driver-and-firmware/ba-p/2176942
+
+https://www.reddit.com/r/SCCM/comments/nswjs3/how_best_to_deploy_hp_drivers_and_bios_updates/
+
+
+
+For my HP fleet, I run HP's Client Management Script Library to run HP Image Assistant. I created an "contentless" application with the following in the installation program field (remove the bolded text if you don't have a BIOS password):
+
+
+
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; & mkdir C:\SWSetup; & cd C:\SWSetup; & Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'; & Set-HPBIOSSetupPassword -NewPassword '123456789'" & PowerShell.exe -ExecutionPolicy Bypass -Command "Write-HPFirmwarePasswordFile -password '2627838604' -outfile C:\SWSetup\currentbiossetuppwd.bin; & Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Analyze /Category:All /Selection:All /Action:Install /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs /BIOSPwdFile:C:\SWSetup\currentbiossetuppwd.bin' -NoNewWindow -Wait; & New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" & rd /s /q C:\HPIA C:\SWSetup & exit
+
+
+
+This creates a reg key for your detection method that erases after reboot:
+
+
+
+HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce REG_SZ HPIA
+
+
+
+It looks crazy but this means I never have to upgrade, package and distribute HPIA every time it updates.
+
+
+
+https://developers.hp.com/hp-client-management/doc/client-management-script-library
