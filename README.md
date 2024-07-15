@@ -94,3 +94,11 @@ cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider 
 ```
 
 > Updated without BIOS Password
+
+Checking HP Support Assistant (downloaded), it does not show any drivers that need to be installed or updated
+
+![HP Support Assistant](https://imgur.com/0mZv3Ra.jpg)
+
+The CMD works successfully
+
+Now need to figure out how to implement it and push via CMD
