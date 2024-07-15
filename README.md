@@ -51,26 +51,13 @@ https://techcommunity.microsoft.com/t5/windows-it-pro-blog/introducing-a-new-dep
 
 https://www.reddit.com/r/SCCM/comments/nswjs3/how_best_to_deploy_hp_drivers_and_bios_updates/
 
-
-
 For my HP fleet, I run HP's Client Management Script Library to run HP Image Assistant. I created an "contentless" application with the following in the installation program field (remove the bolded text if you don't have a BIOS password):
-
-
-
-cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; & mkdir C:\SWSetup; & cd C:\SWSetup; & Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'; & Set-HPBIOSSetupPassword -NewPassword '123456789'" & PowerShell.exe -ExecutionPolicy Bypass -Command "Write-HPFirmwarePasswordFile -password '2627838604' -outfile C:\SWSetup\currentbiossetuppwd.bin; & Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Analyze /Category:All /Selection:All /Action:Install /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs /BIOSPwdFile:C:\SWSetup\currentbiossetuppwd.bin' -NoNewWindow -Wait; & New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" & rd /s /q C:\HPIA C:\SWSetup & exit
-
-
+```cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; & mkdir C:\SWSetup; & cd C:\SWSetup; & Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'; & Set-HPBIOSSetupPassword -NewPassword '123456789'" & PowerShell.exe -ExecutionPolicy Bypass -Command "Write-HPFirmwarePasswordFile -password '2627838604' -outfile C:\SWSetup\currentbiossetuppwd.bin; & Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Analyze /Category:All /Selection:All /Action:Install /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs /BIOSPwdFile:C:\SWSetup\currentbiossetuppwd.bin' -NoNewWindow -Wait; & New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" & rd /s /q C:\HPIA C:\SWSetup & exit```
 
 This creates a reg key for your detection method that erases after reboot:
 
-
-
 HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce REG_SZ HPIA
 
-
-
 It looks crazy but this means I never have to upgrade, package and distribute HPIA every time it updates.
-
-
 
 https://developers.hp.com/hp-client-management/doc/client-management-script-library
