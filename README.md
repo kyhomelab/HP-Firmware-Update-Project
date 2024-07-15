@@ -14,28 +14,16 @@ HP drivers with Intune and Proactive Remediations | scloud
 **DISCLAIMER: Most of the documentation below is my thought process and how I went from one point to another looking for information. A lot of it probably will not make too much sense.**
 
 In summary, the Company Portal shows Configuration Manager-deployed applications for all co-managed clients that use it, while Software Center allows users to install and manage software on their devices.
-
-
-
+> Was trying to figure out the difference between Company Portal and Software Center
 https://www.reddit.com/r/sysadmin/comments/oca5vu/sccm_hp_mik_hp_patch_assistant/
 
 https://www.reddit.com/r/SCCM/comments/zga6x9/how_do_yall_handle_firmware_updates/
 
-
-
-
-
 Same here for Dell but for HP we automated the HPIA for local run via command line through Scheduled task.
 
-	-HP Image Assistant
+-HP Image Assistant
 
-	-If you need to troubleshoot an end-user issue relating to the BIOS, BIOS settings, drivers, or software, you
-
-can run HPIA on the system to compare it to the corresponding HP reference image or any other known, good
-
-image XML file.
-
-
+-If you need to troubleshoot an end-user issue relating to the BIOS, BIOS settings, drivers, or software, you can run HPIA on the system to compare it to the corresponding HP reference image or any other known, good image XML file.
 
 https://ftp.hp.com/pub/caps-softpaq/cmit/whitepapers/HPIAUserGuide.pdf
 
