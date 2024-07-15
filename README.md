@@ -66,10 +66,8 @@ It looks crazy but this means I never have to upgrade, package and distribute HP
 https://developers.hp.com/hp-client-management/doc/client-management-script-library
 
 >  After running script, it prompts for a restart, when able, and it is running through updates on bootup
-
-> 7 updates
-
-> Thunderbolt
+7 updates
+Thunderbolt
 
 > USB-C Controller Firmware
 
