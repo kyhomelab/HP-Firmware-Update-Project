@@ -22,9 +22,8 @@ https://www.reddit.com/r/SCCM/comments/zga6x9/how_do_yall_handle_firmware_update
 
 Same here for Dell but for HP we automated the HPIA for local run via command line through Scheduled task.
 
--HP Image Assistant
-
--If you need to troubleshoot an end-user issue relating to the BIOS, BIOS settings, drivers, or software, you can run HPIA on the system to compare it to the corresponding HP reference image or any other known, good image XML file.
+- HP Image Assistant
+- If you need to troubleshoot an end-user issue relating to the BIOS, BIOS settings, drivers, or software, you can run HPIA on the system to compare it to the corresponding HP reference image or any other known, good image XML file.
 
 https://ftp.hp.com/pub/caps-softpaq/cmit/whitepapers/HPIAUserGuide.pdf
 
