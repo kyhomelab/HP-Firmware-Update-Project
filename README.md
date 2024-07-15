@@ -107,3 +107,15 @@ Now need to figure out how to implement it and push via CMD
 
 ![HPSA1](https://imgur.com/J07L2DK.jpg)
 ![HPSA2](https://imgur.com/VeqeV8w.jpg)
+
+HP system information not gathering data 
+- Under Drivers, it shows all drivers and bios that needs to be updated 
+- Using Script Again Again to test to see what happens on a laptop that needs drivers
+![Script1](https://imgur.com/zHRERnU.jpg)
+
+> Ran it without the Bios Password and it did not go through successfully
+
+![Script2](https://imgur.com/jkOlSA0.jpg)
+
+> Ran the command with the BIOS password again and it seems to continue going through 
+> Need to figure out why it stops when I remove the Bios password
