@@ -65,7 +65,7 @@ It looks crazy but this means I never have to upgrade, package and distribute HP
 
 https://developers.hp.com/hp-client-management/doc/client-management-script-library <br>
 
-After running script, it prompts for a restart, when able, and it is running through updates on bootup <br>
+After running script, it prompts for a restart, when able, and it is running through updates on bootup: <br>
 7 updates <br>
 Thunderbolt <br>
 USB-C Controller Firmware <br>
@@ -73,20 +73,13 @@ Camera Controller <br>
 Fingerprint controller <br>
 Just a few that I caught <br>
 
-> On start up its now prompting me to set up a PIN
+On start up its now prompting me to set up a PIN
 
-  > -Gonna try shutting down and restarting to see if there is a change
-  
-  > -Going into BIOS I am now required to enter a password 
-  
-  > - The BIOS password is 123456789
-  
-  > -Will remove BIOS password from script
-  
-  > -After restarting it is still asking for Windows Hello
-  
-  > -Created a pin, seems to be only for login 
-  
-  > -Logging out to see if it requires it
-  
-  > -It says that the option for PIN is temp unavailable
+- Gonna try shutting down and restarting to see if there is a change
+- Going into BIOS I am now required to enter a password   
+- The BIOS password is 123456789
+- Will remove BIOS password from script
+- After restarting it is still asking for Windows Hello
+- Created a pin, seems to be only for login 
+- Logging out to see if it requires it
+- It says that the option for PIN is temp unavailable
