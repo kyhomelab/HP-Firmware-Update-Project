@@ -99,7 +99,7 @@ Checking HP Support Assistant (downloaded), it does not show any drivers that ne
 
 ![HP Support Assistant](https://imgur.com/0mZv3Ra.jpg)
 
-The CMD works successfully
+<br> The CMD works successfully
 
 Now need to figure out how to implement it and push via CMD
 - Grabbed a newly provisioned HP Elitebook 10 
@@ -108,7 +108,7 @@ Now need to figure out how to implement it and push via CMD
 ![HPSA1](https://imgur.com/J07L2DK.jpg)
 ![HPSA2](https://imgur.com/VeqeV8w.jpg)
 
-HP system information not gathering data 
+<br> HP system information not gathering data 
 - Under Drivers, it shows all drivers and bios that needs to be updated 
 - Using Script Again Again to test to see what happens on a laptop that needs drivers
 ![Script1](https://imgur.com/zHRERnU.jpg)
@@ -117,7 +117,7 @@ HP system information not gathering data
 
 ![Script2](https://imgur.com/jkOlSA0.jpg)
 
-> Ran the command with the BIOS password again and it seems to continue going through. Need to figure out why it stops when I remove the Bios password.
+<br> > Ran the command with the BIOS password again and it seems to continue going through. Need to figure out why it stops when I remove the Bios password.
 
 After ~10 min the cmd terminal goes away
 - No prompt for restart 
