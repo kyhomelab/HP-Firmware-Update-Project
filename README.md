@@ -10,7 +10,9 @@ HP Developers Portal | Using HP Image Assistant with Microsoft Endpoint Manager
 
 HP drivers with Intune and Proactive Remediations | scloud
 
-### My Documentation from ClickUp
+## My Documentation from ClickUp
+**DISCLAIMER: Most of the documentation below is my thought process and how I went from one point to another looking for information. A lot of it probably will not make too much sense.**
+
 In summary, the Company Portal shows Configuration Manager-deployed applications for all co-managed clients that use it, while Software Center allows users to install and manage software on their devices.
 
 
