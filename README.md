@@ -85,5 +85,7 @@ On start up its now prompting me to set up a PIN
 - It says that the option for PIN is temp unavailable
 
 Here is a look at a comparison between mine and a coworkers HP System Information 
+
 ![Imgur](https://imgur.com/CuAwCxe)
+
 ![Imgur](https://imgur.com/F3mEHPT)
