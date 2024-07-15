@@ -102,3 +102,8 @@ Checking HP Support Assistant (downloaded), it does not show any drivers that ne
 The CMD works successfully
 
 Now need to figure out how to implement it and push via CMD
+- Grabbed a newly provisioned HP Elitebook 10 
+- Downloaded HP Support Assistant to see drivers that need to be updated (see sc)
+
+![HPSA1](https://imgur.com/J07L2DK.jpg)
+![HPSA2](https://imgur.com/VeqeV8w.jpg)
