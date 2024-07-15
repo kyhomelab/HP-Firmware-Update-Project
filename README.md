@@ -117,5 +117,4 @@ HP system information not gathering data
 
 ![Script2](https://imgur.com/jkOlSA0.jpg)
 
-> Ran the command with the BIOS password again and it seems to continue going through 
-> Need to figure out why it stops when I remove the Bios password
+> Ran the command with the BIOS password again and it seems to continue going through. Need to figure out why it stops when I remove the Bios password.
