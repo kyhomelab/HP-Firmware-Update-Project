@@ -66,12 +66,12 @@ It looks crazy but this means I never have to upgrade, package and distribute HP
 https://developers.hp.com/hp-client-management/doc/client-management-script-library <br>
 
 After running script, it prompts for a restart, when able, and it is running through updates on bootup: <br>
-7 updates <br>
-Thunderbolt <br>
-USB-C Controller Firmware <br>
-Camera Controller <br>
-Fingerprint controller <br>
-Just a few that I caught <br>
+- 7 updates <br>
+- Thunderbolt <br>
+- USB-C Controller Firmware <br>
+- Camera Controller <br>
+- Fingerprint controller <br>
+- Just a few that I caught <br>
 
 On start up its now prompting me to set up a PIN
 
