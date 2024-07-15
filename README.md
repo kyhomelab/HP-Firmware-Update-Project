@@ -87,3 +87,4 @@ On start up its now prompting me to set up a PIN
 Here is a look at a comparison between mine and a coworkers HP System Information 
 
 ![HP System](https://imgur.com/CuAwCxe.jpg)
+![HP System 2](https://imgur.com/egihQfp.jpg)
