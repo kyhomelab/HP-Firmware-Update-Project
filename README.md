@@ -86,12 +86,17 @@ On start up its now prompting me to set up a PIN
 
 Here is a look at a comparison between mine and a coworkers HP System Information 
 
+<br>
+
 ![HP System](https://imgur.com/CuAwCxe.jpg)
 ![HP System 2](https://imgur.com/egihQfp.jpg)
+
+<br>
 
 ```
 cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; & mkdir C:\SWSetup; & cd C:\SWSetup; & Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'; & Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Analyze /Category:All /Selection:All /Action:Install /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs -NoNewWindow -Wait; & New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" & rd /s /q C:\HPIA C:\SWSetup & exit
 ```
+<br>
 
 > Updated without BIOS Password
 
@@ -105,19 +110,32 @@ Now need to figure out how to implement it and push via CMD
 - Grabbed a newly provisioned HP Elitebook 10 
 - Downloaded HP Support Assistant to see drivers that need to be updated (see sc)
 
+<br>
+
 ![HPSA1](https://imgur.com/J07L2DK.jpg)
 ![HPSA2](https://imgur.com/VeqeV8w.jpg)
 
-<br> HP system information not gathering data 
+<br>
+
+HP system information not gathering data 
 - Under Drivers, it shows all drivers and bios that needs to be updated 
 - Using Script Again Again to test to see what happens on a laptop that needs drivers
+
+<br>
+
 ![Script1](https://imgur.com/zHRERnU.jpg)
+
+<br>
 
 > Ran it without the Bios Password and it did not go through successfully
 
+<br>
+
 ![Script2](https://imgur.com/jkOlSA0.jpg)
 
-<br> > Ran the command with the BIOS password again and it seems to continue going through. Need to figure out why it stops when I remove the Bios password.
+<br> 
+
+> Ran the command with the BIOS password again and it seems to continue going through. Need to figure out why it stops when I remove the Bios password.
 
 After ~10 min the cmd terminal goes away
 - No prompt for restart 
