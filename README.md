@@ -64,3 +64,21 @@ HKLM:SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce REG_SZ HPIA
 It looks crazy but this means I never have to upgrade, package and distribute HPIA every time it updates.
 
 https://developers.hp.com/hp-client-management/doc/client-management-script-library
+
+>  After running script, it prompts for a restart, when able, and it is running through updates on bootup
+> 7 updates
+> Thunderbolt
+> USB-C Controller Firmware
+> Camera Controller
+> Fingerprint controller
+> A few that I caught
+
+> On start up its now prompting me to set up a PIN
+  > -Gonna try shutting down and restarting to see if there is a change
+  > -Going into BIOS I am now required to enter a password 
+  > - The BIOS password is 123456789
+  > -Will remove BIOS password from script
+  > -After restarting it is still asking for Windows Hello
+  > -Created a pin, seems to be only for login 
+  > -Logging out to see if it requires it
+  > -It says that the option for PIN is temp unavailable
