@@ -140,4 +140,388 @@ HP system information not gathering data
 After ~10 min the cmd terminal goes away
 - No prompt for restart 
 - After restarting took ~2 min before anything displayed
-- But it is running through driver updates and installing 
+- But it is running through driver updates and installing
+
+<br>
+
+![Updates1](https://imgur.com/edCts5c.jpg)
+![Updates2](https://imgur.com/40jQhs0.jpg)
+![Updates3](https://imgur.com/j2cZyFO.jpg)
+
+<br>
+
+Will try script again to see if it may catch those
+- Saying password Bios is set, will try again with an updated script soon
+- Restarting
+
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; mkdir C:\SWSetup; cd C:\SWSetup; Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'; Set-HPBIOSSetupPassword -NewPassword '123456789'" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Write-HPFirmwarePasswordFile -password '2627838604' -outfile C:\SWSetup\currentbiossetuppwd.bin; Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Download /Category:All /Selection:All /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs /BIOSPwdFile:C:\SWSetup\currentbiossetuppwd.bin' -NoNewWindow -Wait; New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" ^
+
+& rd /s /q C:\HPIA C:\SWSetup ^
+
+& exit
+```
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; mkdir C:\SWSetup; cd C:\SWSetup; Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Download /Category:All /Selection:All /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait; New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" ^
+
+& rd /s /q C:\HPIA C:\SWSetup ^
+
+& exit
+```
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; mkdir C:\SWSetup; cd C:\SWSetup; Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Download /Category:DriverPack /Selection:All /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait; New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" ^
+
+& rd /s /q C:\HPIA C:\SWSetup ^
+
+& exit
+```
+> Was attempting to change the categories and what is targeted. I was following the official documentation here: [HP Image Assistant User Guide](https://ftp.hp.com/pub/caps-softpaq/cmit/whitepapers/HPIAUserGuide.pdf)
+
+<br>
+
+https://www.reddit.com/r/Hewlett_Packard/comments/18dc7z4/hp_image_assistant_user_prompt_restart/
+```
+C:\hpiasw\HPImageAssistant.exe /Operation:Analyze /Category:All /selection:All /Action:Install /Noninteractive /reportFolder:c:\hpiasw\report
+```
+Hmm I will see if there can be a prompt to restart
+
+---
+
+Attempting to install an older driver pack: **sp147159**
+
+Using this cmd:
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; mkdir C:\SWSetup; cd C:\SWSetup; Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Download /SoftpaqID:sp147159 /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait; New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" ^
+
+& rd /s /q C:\HPIA C:\SWSetup ^
+
+& exit
+```
+---
+<br>
+
+Taking a step back and starting with the original reddit script . I only changed the function of the Bios password set, and specified softpaq 147159
+
+<br>
+
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" & PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; & mkdir C:\SWSetup; & cd C:\SWSetup; & Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'" & PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Scan /Category:All /Action:Download /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait" & PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Install /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait; & New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" & rd /s /q C:\HPIA C:\SWSetup & exit
+```
+
+<br>
+
+> Attempted a restart after this, and no changes took place
+
+Updated script to ensure ALL categories (BIOS, Drivers, Software, Firmware, Accessories) are targeted.
+- Added Install type all "All: This option would indicate that all types of installable components should be installed"
+
+<br>
+
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; mkdir C:\SWSetup; cd C:\SWSetup; Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Download /Category:BIOS,Drivers,Software,Firmware,Accessories /Selection:All /InstallType:All /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait; New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" ^
+
+& rd /s /q C:\HPIA C:\SWSetup ^
+
+& exit
+```
+<br>
+
+> Updated with @echo
+
+<br>
+
+```
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force; mkdir C:\SWSetup; cd C:\SWSetup; Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'" ^
+
+& PowerShell.exe -ExecutionPolicy Bypass -Command "Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Download /Category:BIOS,Drivers,Software,Firmware,Accessories /Selection:All /InstallType:All /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait; New-Item -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce -Value HPIA -Force" ^
+
+& rd /s /q C:\HPIA C:\SWSetup ^
+
+& exit
+```
+<br>
+
+> Converted to Powershell script:
+
+<br>
+
+```
+# Set execution policy (avoid using cmd.exe)
+
+Set-ExecutionPolicy Bypass -Scope CurrentUser
+
+# Install NuGet provider (force if already exists)
+
+Install-PackageProvider -Name NuGet -Force
+
+# Install PowerShellGet module (skip publisher check, force if already exists)
+
+Install-Module -Name PowerShellGet -SkipPublisherCheck -Force
+
+# Install HPCMSL module (accept license, force if already exists)
+
+Install-Module -Name HPCMSL -AcceptLicense -Force
+
+# Create folders (optional, comment out if not needed)
+
+# New-Item -Path C:\SWSetup -ItemType Directory
+
+# New-Item -Path C:\Logs -ItemType Directory
+
+# Extract HPIA (assuming HPIA is already installed)
+
+# Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'  # Only if not extracted yet
+
+# Analyze system for updates in the background
+
+Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList @(
+
+  '/Operation:Analyze',
+
+  '/Category:Drivers',  # Analyze drivers specifically
+
+  '/Selection:All',
+
+  '/Silent'  # Run silently in the background
+
+) -Wait  # Wait for process to finish
+
+# Optional: Download and install updates (modify arguments as needed)
+
+ Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList @(
+
+   '/Operation:Download',
+
+   '/SoftpaqDownloadFolder:C:\SWSetup',  # Modify download folder if needed
+
+   '/noninteractive',
+
+   '/ReportFolder:C:\Logs'  # Modify report folder if needed
+
+ ) -Wait
+
+# Exit PowerShell
+
+exit
+```
+
+<br>
+
+> Went barebones for the execution script to see if it works. Will subject manager to test.
+
+<br>
+
+```
+# Set execution policy (avoid using cmd.exe)
+
+Set-ExecutionPolicy Bypass -Scope CurrentUser
+
+# Install NuGet provider (force if already exists)
+
+Install-PackageProvider -Name NuGet -Force
+
+# Install PowerShellGet module (skip publisher check, force if already exists)
+
+Install-Module -Name PowerShellGet -SkipPublisherCheck -Force
+
+# Install HPCMSL module (accept license, force if already exists)
+
+Install-Module -Name HPCMSL -AcceptLicense -Force
+
+# Create temporary folders (optional, modify paths as needed)
+
+New-Item -Path C:\SWSetup -ItemType Directory
+
+New-Item -Path C:\Logs -ItemType Directory
+
+# Download HPIA (assuming latest version)
+
+$HPIAUrl = "https://ftp.ext.hp.com/pub/caps-softpaq/cmit/HPIA.html"
+
+$HPIAFile = Invoke-WebRequest -Uri $HPIAUrl | Select-Object -ExpandProperty Content | Out-File -FilePath C:\SWSetup\HPIA.exe -Encoding ASCII
+
+# Extract HPIA (assuming downloaded file is named HPIA.exe)
+
+Expand-Archive -Path C:\SWSetup\HPIA.exe -DestinationPath C:\HPIA
+
+# Analyze system for updates (focusing on drivers)
+
+Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList @(
+
+  '/Operation:Analyze',
+
+  '/Category:Drivers',
+
+  '/Silent'
+
+) -Wait
+
+# Check if updates are available (assuming success code stored in $LastExitCode)
+
+if ($LastExitCode -eq 0) {
+
+  # Download updates silently
+
+  Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList @(
+
+    '/Operation:Download',
+
+    '/SoftpaqDownloadFolder:C:\SWSetup',  # Modify download folder if needed
+
+    '/noninteractive',
+
+    '/ReportFolder:C:\Logs',  # Modify report folder if needed
+
+    '/Silent'
+
+  ) -Wait
+
+  # Install downloaded updates silently (might require reboot)
+
+  Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList @(
+
+    '/Operation:Install',
+
+    '/Selection:All',  # Install all downloaded updates
+
+    '/Silent'
+
+  ) -Wait
+
+  # Prompt for reboot if required (assuming flag in report)
+
+  $reportPath = Get-ChildItem -Path C:\Logs -Filter "*.log" | Select-Object -Last 1  # Get latest log file
+
+  $rebootRequired = Select-String -Path $reportPath -Pattern "Reboot Required"  # Check for reboot flag
+
+  if ($rebootRequired.Matches.Count -gt 0) {
+
+    Write-Host "A system reboot may be required to complete the update installation."
+
+    Write-Host "Please save your work and reboot your system when ready."
+
+  }
+
+} else {
+
+  # Write message if no updates found
+
+  Write-Host "No driver updates found."
+
+}
+
+# Clean up (optional, comment out if needed)
+
+# Remove-Item -Path C:\SWSetup -Recurse -Force
+
+# Remove-Item -Path C:\HPIA -Recurse -Force
+
+# Exit PowerShell
+
+exit
+```
+
+<br>
+---
+<br>
+
+> New Day New Testing :)
+> Starting with this PS script:
+
+<br>
+
+```
+# PowerShell script to automate HP drivers, firmware, and software updates
+
+
+
+# Install NuGet package provider
+
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider -Name NuGet -Force"
+
+
+
+# Install PowerShellGet module
+
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name PowerShellGet -SkipPublisherCheck -Force"
+
+
+
+# Install HPCMSL module (HP Client Management Script Library)
+
+cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-Module -Name HPCMSL -AcceptLicense -Force"
+
+
+
+# Create directory for software setup
+
+mkdir C:\SWSetup
+
+
+
+# Change directory to software setup directory
+
+cd C:\SWSetup
+
+
+
+# Install HP Image Assistant and extract files
+
+Install-HPImageAssistant -Extract -DestinationPath 'C:\HPIA'
+
+
+
+# Start HP Image Assistant to analyze and install updates
+
+Start-Process -FilePath 'C:\HPIA\HPImageAssistant.exe' -ArgumentList '/Operation:Analyze /Category:All /Selection:All /Action:Install /SoftpaqDownloadFolder:C:\SWSetup /noninteractive /ReportFolder:C:\Logs' -NoNewWindow -Wait
+
+
+
+# Clean up: Remove directories used for temporary files
+
+rd /s /q C:\HPIA C:\SWSetup
+
+
+
+# Exit the script
+
+exit
+```
+
+![Test1](https://imgur.com/MwiCPTn.jpg)
+![Test2](.jpg)
+![Test3](.jpg)
