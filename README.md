@@ -88,8 +88,9 @@ Here is a look at a comparison between mine and a coworkers HP System Informatio
 
 <br>
 
-![HP System](https://imgur.com/CuAwCxe.jpg)
-![HP System 2](https://imgur.com/egihQfp.jpg)
+<img src="https://imgur.com/CuAwCxe.jpg" height="80%" width="80%">
+
+<img src="https://imgur.com/egihQfp.jpg" height="80%" width="80%">
 
 <br>
 
@@ -102,7 +103,7 @@ cmd /c PowerShell.exe -ExecutionPolicy Bypass -Command "Install-PackageProvider 
 
 Checking HP Support Assistant (downloaded), it does not show any drivers that need to be installed or updated
 
-![HP Support Assistant](https://imgur.com/0mZv3Ra.jpg)
+<img src=https://imgur.com/0mZv3Ra.jpg height="80%" width="80%">
 
 <br> The CMD works successfully
 
@@ -112,8 +113,8 @@ Now need to figure out how to implement it and push via CMD
 
 <br>
 
-![HPSA1](https://imgur.com/J07L2DK.jpg)
-![HPSA2](https://imgur.com/VeqeV8w.jpg)
+<img src="https://imgur.com/J07L2DK.jpg" height="80%" width="80%">
+<img src="https://imgur.com/VeqeV8w.jpg" height="80%" width="80%">
 
 <br>
 
@@ -123,7 +124,7 @@ HP system information not gathering data
 
 <br>
 
-![Script1](https://imgur.com/zHRERnU.jpg)
+<img src=https://imgur.com/zHRERnU.jpg height="80%" width="80%">
 
 <br>
 
@@ -131,7 +132,7 @@ HP system information not gathering data
 
 <br>
 
-![Script2](https://imgur.com/jkOlSA0.jpg)
+<img src=https://imgur.com/jkOlSA0.jpg height="80%" width="80%">
 
 <br> 
 
@@ -144,9 +145,9 @@ After ~10 min the cmd terminal goes away
 
 <br>
 
-![Updates1](https://imgur.com/edCts5c.jpg)
-![Updates2](https://imgur.com/40jQhs0.jpg)
-![Updates3](https://imgur.com/j2cZyFO.jpg)
+<img src=https://imgur.com/edCts5c.jpg height="80%" width="80%">
+<img src=https://imgur.com/40jQhs0.jpg height="80%" width="80%">
+<img src=https://imgur.com/j2cZyFO.jpg height="80%" width="80%">
 
 <br>
 
@@ -522,6 +523,29 @@ rd /s /q C:\HPIA C:\SWSetup
 exit
 ```
 
-![Test1](https://imgur.com/MwiCPTn.jpg)
-![Test2](.jpg)
-![Test3](.jpg)
+<img src=https://imgur.com/MwiCPTn.jpg height="80%" width="80%">
+<img src=https://imgur.com/LA21HHE.jpg height="80%" width="80%">
+<br>
+Will try to take out "/q" and test on different machine.
+
+Restarting now
+<br>
+
+<img src=https://imgur.com/MYSlZhf.jpg height="80%" width="80%">
+<br>
+> This is a parameter error I was receiving:
+
+```
+Remove-Item : A positional parameter cannot be found that accepts argument '/q'.
+
+At line:1 char:1
+
++ rd /s /q C:\HPIA C:\SWSetup
+
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    + CategoryInfo          : InvalidArgument: (:) [Remove-Item], ParameterBindingException
+
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+```
+
